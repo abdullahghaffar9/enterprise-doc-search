@@ -1,0 +1,15 @@
+# Secrets
+.env
+.env.local
+.env.*
+
+# Python compilation & Libraries
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# IDE settings (Optional but recommended)
+.vscode/
+.idea/

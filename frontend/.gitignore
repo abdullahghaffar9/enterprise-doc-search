@@ -1,0 +1,10 @@
+# Secrets
+.env
+.env.local
+.env.*
+
+# Dependencies & Build
+node_modules/
+dist/
+build/
+.DS_Store
