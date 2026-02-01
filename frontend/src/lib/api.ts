@@ -25,10 +25,12 @@ export async function uploadPdf(
     headers: { 'Content-Type': 'multipart/form-data' },
     timeout: TIMEOUT_MS,
     onUploadProgress: options?.onProgress
-      ? (event: ProgressEvent) => {
+      ? (event) => {
           if (event.total) {
             const percent = Math.round((event.loaded / event.total) * 100);
-            options.onProgress(percent);
+            if (options.onProgress) {
+              options.onProgress(percent);
+            }
           }
         }
       : undefined,
