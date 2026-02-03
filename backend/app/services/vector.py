@@ -1,23 +1,32 @@
 
 import os
+import logging
 from typing import List
 from pinecone import Pinecone
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
+
+logger = logging.getLogger(__name__)
 
 class VectorService:
     def __init__(self):
-        print("[VectorService] Initializing Pinecone...")
-        self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-        print("[VectorService] Pinecone client created.")
-        self.index_name = os.getenv("PINECONE_INDEX_NAME")
-        print(f"[VectorService] Index name: {self.index_name}")
-        self.index = self.pc.Index(self.index_name)
-        print("[VectorService] Pinecone index initialized.")
+        try:
+            logger.info("[VectorService] Initializing Pinecone...")
+            self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+            logger.info("[VectorService] Pinecone client created.")
+            self.index_name = os.getenv("PINECONE_INDEX_NAME")
+            if self.index_name is None:
+                raise ValueError("PINECONE_INDEX_NAME environment variable is not set.")
+            logger.info(f"[VectorService] Index name: {self.index_name}")
+            self.index = self.pc.Index(self.index_name)
+            logger.info("[VectorService] Pinecone index initialized.")
 
-        # 2. Initialize Local Embedding Model (CPU compatible)
-        print("[VectorService] Loading local embedding model (all-MiniLM-L6-v2)...")
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        print("[VectorService] Embedding model loaded.")
+            # Initialize FastEmbed Model (ONNX Runtime - lightweight, RAM efficient)
+            logger.info("[VectorService] Loading FastEmbed model (BAAI/bge-small-en-v1.5)...")
+            self.model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+            logger.info("[VectorService] FastEmbed model loaded successfully.")
+        except Exception as e:
+            logger.error(f"[VectorService] Initialization failed: {str(e)}")
+            raise e
 
     def clear_index(self):
         """
@@ -29,14 +38,19 @@ class VectorService:
 
     async def embed_chunks(self, chunks: List[str]) -> List[List[float]]:
         """
-        Generates embeddings locally.
+        Generates embeddings locally using FastEmbed (ONNX Runtime).
+        Handles generator output from TextEmbedding.embed().
         """
         try:
-            # model.encode returns a numpy array, convert to list for Pinecone
-            embeddings = self.model.encode(chunks)
-            return embeddings.tolist()
+            # FastEmbed returns a generator, convert to list then to standard Python lists
+            embeddings_generator = self.model.embed(chunks)
+            embeddings_list = list(embeddings_generator)
+            # Convert numpy arrays to standard Python lists for Pinecone compatibility
+            embeddings = [emb.tolist() if hasattr(emb, 'tolist') else list(emb) for emb in embeddings_list]
+            logger.debug(f"Generated {len(embeddings)} embeddings")
+            return embeddings
         except Exception as e:
-            print(f"❌ Embedding Error: {str(e)}")
+            logger.error(f"❌ Embedding Error: {str(e)}")
             raise e
 
     async def upsert_chunks(self, chunks_data: List[dict]):
@@ -87,11 +101,16 @@ class VectorService:
 
     async def search(self, query: str, k: int = 5):
         """
-        Searches Pinecone using a locally generated query embedding.
+        Searches Pinecone using a locally generated query embedding via FastEmbed.
         """
         try:
-            # 1. Embed Query Locally
-            query_embedding = self.model.encode([query])[0].tolist()
+            # 1. Embed Query Locally using FastEmbed
+            query_embeddings = list(self.model.embed([query]))
+            query_embedding = query_embeddings[0]
+            # Convert numpy array to list if needed
+            query_embedding = query_embedding.tolist() if hasattr(query_embedding, 'tolist') else list(query_embedding)
+            
+            logger.debug(f"Generated query embedding with dimension {len(query_embedding)}")
             
             # 2. Query Pinecone
             result = self.index.query(
@@ -99,7 +118,14 @@ class VectorService:
                 top_k=k,
                 include_metadata=True
             )
-            return result.matches
+            logger.info(f"Query result: {result}")
+            # If result is a dict, try to access 'matches' key; else, use getattr
+            if isinstance(result, dict):
+                matches = result["matches"] if "matches" in result else None
+            else:
+                matches = getattr(result, "matches", None)
+            logger.info(f"Query returned {len(matches) if matches else 0} matches")
+            return matches
         except Exception as e:
-            print(f"❌ Search Failed: {str(e)}")
+            logger.error(f"❌ Search Failed: {str(e)}")
             raise e
