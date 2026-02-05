@@ -34,10 +34,25 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUploadComplete }) => {
         await uploadPdf(file);
         setProgress(100);
         setStatus('success');
+        showSuccess('PDF uploaded successfully');
         if (onUploadComplete) onUploadComplete(file.name);
-      } catch (err) {
+      } catch (err: unknown) {
         setStatus('error');
-        setErrorMsg('Upload failed');
+        let errorMessage = 'Upload failed';
+        
+        // Extract meaningful error from axios or network error
+        if (err instanceof Error) {
+          if (err.message.includes('timeout')) {
+            errorMessage = 'Upload timeout - backend may be busy';
+          } else if (err.message.includes('network') || err.message.includes('Network')) {
+            errorMessage = 'Network error - check backend connection';
+          } else {
+            errorMessage = err.message || 'Upload failed';
+          }
+        }
+        
+        setErrorMsg(errorMessage);
+        showError(errorMessage);
       }
     }
   };

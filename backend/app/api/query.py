@@ -10,7 +10,7 @@ from typing import Any, Dict, List
 from fastapi import APIRouter, HTTPException
 
 from app.schemas import QueryRequest, QueryResponse, SourceDoc
- 
+from app.services.llm import LLMService
 from app.services.rerank import RerankService
 from app.services.vector import VectorService
 
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 vector_service = VectorService()
 rerank_service = RerankService()
- 
+llm_service = LLMService()
 
 
 def _to_source_docs(docs: List[Dict[str, Any]]) -> List[SourceDoc]:

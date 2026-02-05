@@ -28,9 +28,14 @@ async def lifespan(_app: FastAPI):
 
 def _make_app() -> FastAPI:
     app = FastAPI(title="AI Document QA API", lifespan=lifespan)
+    
+    # Get CORS origins from settings
+    settings = get_settings()
+    cors_origins = settings.cors_origins_list()
+    
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:5173"],
+        allow_origins=cors_origins if cors_origins else ["*"],  # Allow all if not configured
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
