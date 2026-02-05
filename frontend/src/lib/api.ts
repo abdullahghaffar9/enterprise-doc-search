@@ -16,7 +16,6 @@ export const TIMEOUT_MS = 60_000;
 
 const client = axios.create({
   baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
   timeout: TIMEOUT_MS,
 });
 
@@ -47,6 +46,7 @@ export async function queryDocuments(
   payload: QueryRequest
 ): Promise<QueryResponse> {
   const { data } = await client.post<QueryResponse>('/api/query', payload, {
+    headers: { 'Content-Type': 'application/json' },
     timeout: TIMEOUT_MS,
   });
   return data;

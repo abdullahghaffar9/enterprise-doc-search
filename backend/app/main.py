@@ -1,10 +1,17 @@
 
 
 from __future__ import annotations
-from dotenv import load_dotenv
-load_dotenv()
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load .env from backend directory (parent of app directory)
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
+print(f"[DEBUG] Loading .env from: {env_path}")
+print(f"[DEBUG] .env exists: {env_path.exists()}")
 print(f"[DEBUG] PINECONE_API_KEY from env: {os.environ.get('PINECONE_API_KEY')}")
+
 """
 AI Document QA API: upload PDFs, query via RAG.
 """

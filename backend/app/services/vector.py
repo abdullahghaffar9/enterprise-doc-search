@@ -1,7 +1,7 @@
 
 import os
 import logging
-from typing import List
+from typing import List, Optional
 from pinecone import Pinecone
 from fastembed import TextEmbedding
 
@@ -20,13 +20,20 @@ class VectorService:
             self.index = self.pc.Index(self.index_name)
             logger.info("[VectorService] Pinecone index initialized.")
 
-            # Initialize FastEmbed Model (ONNX Runtime - lightweight, RAM efficient)
-            logger.info("[VectorService] Loading FastEmbed model (BAAI/bge-small-en-v1.5)...")
-            self.model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
-            logger.info("[VectorService] FastEmbed model loaded successfully.")
+            # LAZY LOAD FastEmbed Model (ONNX Runtime) - loaded only on first use
+            # This saves significant memory during app startup (critical for Render Free Tier 512MB limit)
+            self.model: Optional[TextEmbedding] = None
+            logger.info("[VectorService] FastEmbed model will be loaded on first use (lazy loading enabled).")
         except Exception as e:
             logger.error(f"[VectorService] Initialization failed: {str(e)}")
             raise e
+
+    def _load_model(self):
+        """Load the FastEmbed model lazily on first use."""
+        if self.model is None:
+            logger.info("[VectorService] Loading FastEmbed model (BAAI/bge-small-en-v1.5)...")
+            self.model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+            logger.info("[VectorService] FastEmbed model loaded successfully.")
 
     def clear_index(self):
         """
@@ -42,6 +49,8 @@ class VectorService:
         Handles generator output from TextEmbedding.embed().
         """
         try:
+            self._load_model()  # Lazy load model on first use
+            assert self.model is not None, "Model should be loaded by _load_model()"
             # FastEmbed returns a generator, convert to list then to standard Python lists
             embeddings_generator = self.model.embed(chunks)
             embeddings_list = list(embeddings_generator)
@@ -104,6 +113,8 @@ class VectorService:
         Searches Pinecone using a locally generated query embedding via FastEmbed.
         """
         try:
+            self._load_model()  # Lazy load model on first use
+            assert self.model is not None, "Model should be loaded by _load_model()"
             # 1. Embed Query Locally using FastEmbed
             query_embeddings = list(self.model.embed([query]))
             query_embedding = query_embeddings[0]
