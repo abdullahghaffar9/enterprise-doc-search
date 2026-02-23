@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import FileUpload from './components/FileUpload';
 import SearchDashboard from './components/SearchDashboard';
 
+// Main application component with header, file upload, and search dashboard
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">{children}</h2>
