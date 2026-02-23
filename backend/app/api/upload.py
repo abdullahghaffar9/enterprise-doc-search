@@ -1,6 +1,7 @@
 """
 Upload PDF documents: validate, ingest, upsert to vector store.
 Business logic lives in services; routes handle HTTP only.
+Supports single file uploads with progress tracking.
 """
 from __future__ import annotations
 
