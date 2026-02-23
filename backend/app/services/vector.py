@@ -7,6 +7,7 @@ from fastembed import TextEmbedding
 
 logger = logging.getLogger(__name__)
 
+# Vector embedding and storage service using Pinecone
 class VectorService:
     def __init__(self):
         try:
