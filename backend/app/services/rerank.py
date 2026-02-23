@@ -1,6 +1,7 @@
 """
 Rerank candidates via HuggingFace cross-encoder.
 Uses config and logging; raises on API failure instead of silent fallback.
+Improves retrieval quality by scoring relevance of candidate documents.
 """
 from __future__ import annotations
 
