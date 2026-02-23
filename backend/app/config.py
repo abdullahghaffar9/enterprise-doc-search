@@ -1,6 +1,7 @@
 """
 Centralized configuration via environment variables.
 Uses pydantic-settings for validation and safe defaults.
+Manages API keys and model selections without hardcoding secrets.
 """
 from __future__ import annotations
 
