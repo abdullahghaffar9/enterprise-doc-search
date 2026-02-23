@@ -2,6 +2,7 @@ import React from 'react';
 import { Sun, Moon, Github, User } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
+// Fixed header with theme toggle, GitHub link, and user menu
 export default function Header() {
   return (
     <header className="sticky top-0 h-16 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800 z-40 flex items-center px-8 justify-between">
