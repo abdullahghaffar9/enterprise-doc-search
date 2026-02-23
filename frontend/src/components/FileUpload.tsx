@@ -6,6 +6,7 @@ import { uploadPdf } from '../lib/api';
 import { showSuccess, showError } from '../lib/toast';
 import clsx from 'clsx';
 
+// PDF file upload component with drag-and-drop support and progress tracking
 interface FileUploadProps {
   onUploadComplete?: (filename: string) => void;
 }
