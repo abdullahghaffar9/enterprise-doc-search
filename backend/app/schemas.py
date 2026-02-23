@@ -1,5 +1,6 @@
 """
 Pydantic request/response schemas for all API endpoints.
+Defines data contracts for upload, query, and other operations.
 """
 from __future__ import annotations
 
