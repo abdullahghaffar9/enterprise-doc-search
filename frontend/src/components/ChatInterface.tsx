@@ -6,6 +6,7 @@ import { getErrorMessage, isTimeoutError } from '../types/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 
+// Interactive chat interface for querying uploaded documents
 interface ChatInterfaceProps {
   filename: string;
   onBack: () => void;
