@@ -1,6 +1,7 @@
 """
 Query documents: vector search -> rerank -> LLM answer.
 Uses schemas, structured error handling, and logging.
+Implements RAG pipeline with multi-stage retrieval and ranking.
 """
 from __future__ import annotations
 
