@@ -1,6 +1,7 @@
 """
 LLM: factual answer from HuggingFace, optional polish via Groq.
 Uses config and logging; propagates failures instead of silent fallbacks.
+Supports multiple providers (HF, Groq, OpenAI, Local) for flexibility.
 """
 from __future__ import annotations
 
