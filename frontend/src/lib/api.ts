@@ -2,6 +2,7 @@
  * Centralized API client: base URL, 60s timeouts.
  * Prevents infinite loading when backend hangs (e.g. model download).
  * Uses relative /api paths which are proxied in dev via vite.config.ts
+ * Handles both development and production environments seamlessly.
  */
 import axios from 'axios';
 import type { QueryRequest, QueryResponse, UploadResponse } from '../types/api';
