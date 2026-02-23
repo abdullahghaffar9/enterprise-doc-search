@@ -6,6 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load .env from backend directory (parent of app directory)
+# Configuration is loaded early to ensure all env variables are available
 env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 print(f"[DEBUG] Loading .env from: {env_path}")
