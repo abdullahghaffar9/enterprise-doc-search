@@ -5,6 +5,7 @@ import re
 import uuid
 import logging
 
+# PDF processing and text chunking utilities for document ingestion
 def _chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]:
     """
     Splits text into chunks of up to chunk_size, with optional overlap.
