@@ -4,6 +4,7 @@ import { queryDocuments } from '../lib/api';
 import { motion } from 'framer-motion';
 import Typewriter from './Typewriter';
 
+// RAG-powered document search interface with query input and results display
 const SearchDashboard = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
