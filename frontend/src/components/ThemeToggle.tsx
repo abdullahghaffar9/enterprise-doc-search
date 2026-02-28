@@ -3,6 +3,7 @@ import { Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../hooks/useTheme';
 
+// Animated button that switches between light and dark mode using useTheme hook
 export default function ThemeToggle() {
   const [theme, toggleTheme] = useTheme();
   return (
