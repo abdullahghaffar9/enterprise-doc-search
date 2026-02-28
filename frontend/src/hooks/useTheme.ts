@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
+// Persists selected theme in localStorage and syncs the `dark` CSS class on <html>
 export function useTheme(): [Theme, () => void] {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
