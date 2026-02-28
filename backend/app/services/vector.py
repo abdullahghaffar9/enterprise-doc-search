@@ -81,6 +81,7 @@ class VectorService:
                 raise ValueError("No valid text chunks to upload.")
 
             # Use deterministic IDs: filename_chunk_{i}
+            # Deterministic IDs allow re-uploads to overwrite existing vectors cleanly
             for i, chunk in enumerate(valid_chunks):
                 filename = chunk.get("filename", "file")
                 chunk["id"] = f"{filename}_chunk_{i}"
