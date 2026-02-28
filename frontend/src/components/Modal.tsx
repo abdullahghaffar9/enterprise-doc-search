@@ -9,6 +9,7 @@ interface ModalProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
+// Maps the size prop to a Tailwind max-width class for the modal panel
 const sizeMap = {
   sm: 'max-w-md',
   md: 'max-w-xl',
