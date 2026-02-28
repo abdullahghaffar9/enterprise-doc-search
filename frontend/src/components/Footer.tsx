@@ -1,5 +1,6 @@
 import { Github, Linkedin } from 'lucide-react';
 
+// Site footer with brand name and developer social links
 const Footer = () => (
   <footer className="w-full border-t border-slate-200 dark:border-slate-800 py-6 bg-transparent">
     <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
