@@ -39,6 +39,7 @@ class VectorService:
     def clear_index(self):
         """
         Delete all vectors in the Pinecone index.
+        WARNING: This is irreversible — all stored embeddings will be lost.
         """
         print("[VectorService] Deleting all vectors in the index...")
         self.index.delete(delete_all=True)
