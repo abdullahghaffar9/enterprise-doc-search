@@ -3,6 +3,7 @@ import { Command, Home, FileText, Settings, User } from 'lucide-react';
 import clsx from 'clsx';
 import ThemeToggle from './ThemeToggle';
 
+// Top-level navigation items rendered in the sidebar menu
 const navLinks = [
   { name: 'Home', icon: Home },
   { name: 'Documents', icon: FileText },
