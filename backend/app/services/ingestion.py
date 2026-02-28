@@ -58,6 +58,7 @@ def _chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str
         final_chunks.append(chunk.strip())
     return final_chunks
 
+# Extracts text from every page of a PDF, cleans it, then partitions into chunks
 def process_pdf(file_bytes: bytes, filename: str) -> List[Dict[str, Any]]:
     logger = logging.getLogger(__name__)
     try:
