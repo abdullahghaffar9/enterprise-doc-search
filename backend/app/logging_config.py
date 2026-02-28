@@ -1,5 +1,6 @@
 """
 Configure application-wide logging. Replace all print() with logger calls.
+Outputs structured log lines with timestamp, level, module name, and message.
 """
 from __future__ import annotations
 
