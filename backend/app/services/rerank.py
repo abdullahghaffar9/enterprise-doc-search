@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 RERANK_MODEL_URL = (
     "https://router.huggingface.co/hf-inference/models/cross-encoder/ms-marco-MiniLM-L-6-v2"
 )
+# Timeout in seconds for the HuggingFace reranking API request
 RERANK_TIMEOUT = 30
 
 
