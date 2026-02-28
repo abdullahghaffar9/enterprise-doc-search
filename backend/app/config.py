@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     allowed_origins: str = "http://localhost:5173,http://localhost:3000"
 
     def cors_origins_list(self) -> List[str]:
+        # Splits comma-separated origins string into a clean list for CORS middleware
         if not self.allowed_origins.strip():
             return []
         return [x.strip() for x in self.allowed_origins.split(",") if x.strip()]
