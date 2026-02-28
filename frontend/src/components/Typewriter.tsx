@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 interface TypewriterProps {
   text: string;
-  speed?: number;
-  delay?: number;
+  speed?: number; // ms per character
+  delay?: number; // ms before typing starts
 }
 
 const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 5, delay = 0 }) => {
