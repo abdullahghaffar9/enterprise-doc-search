@@ -1,3 +1,4 @@
+// Thin wrappers around sonner toast notifications for consistent UX feedback
 import { toast } from 'sonner';
 
 export function showSuccess(message: string) {
