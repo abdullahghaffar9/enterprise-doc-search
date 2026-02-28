@@ -13,6 +13,7 @@ interface State {
 
 /**
  * Error Boundary to prevent white-screen crashes. Catches render errors in children.
+ * Displays a fallback UI and logs error details to the console for debugging.
  */
 export default class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
