@@ -37,6 +37,7 @@ async def upload_document(file: UploadFile = File(...)) -> UploadResponse:
         raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.exception("PDF processing failed for %s", file.filename)
+        # 422 signals the file was received but could not be parsed/processed
         raise HTTPException(status_code=422, detail="PDF processing failed.") from e
 
     if not chunks:
