@@ -67,6 +67,7 @@ class VectorService:
         """
         Embeds and upserts chunks to Pinecone.
         Skips and logs empty/whitespace chunks. Raises if none valid.
+        Batches vectors to stay within Pinecone's per-request limits.
         """
         try:
             valid_chunks = []
