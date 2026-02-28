@@ -45,6 +45,7 @@ class LLMService:
         self.hf_client = InferenceClient(api_key=self.hf_api_key) if self.hf_api_key else None
         self.groq_client = Groq(api_key=self.groq_api_key) if self.groq_api_key else None
 
+    # Returns ordered list of fallback model names for the given provider
     def _get_fallbacks(self, provider: str) -> list:
         if provider == "groq":
             return GROQ_MODELS
