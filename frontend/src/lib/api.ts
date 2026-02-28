@@ -43,6 +43,7 @@ export async function uploadPdf(
   return data;
 }
 
+// Sends user query to the RAG pipeline and returns answer with source docs
 export async function queryDocuments(
   payload: QueryRequest
 ): Promise<QueryResponse> {
