@@ -1,5 +1,6 @@
 /**
  * API request/response types. No `any`; strict typing for props and API.
+ * Mirrors the Pydantic schemas defined in the FastAPI backend.
  */
 
 export interface UploadResponse {
