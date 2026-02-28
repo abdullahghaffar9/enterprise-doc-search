@@ -23,6 +23,7 @@ rerank_service = RerankService()
 llm_service = LLMService()
 
 
+# Converts raw vector search result dicts into typed SourceDoc response models
 def _to_source_docs(docs: List[Dict[str, Any]]) -> List[SourceDoc]:
     return [
         SourceDoc(
