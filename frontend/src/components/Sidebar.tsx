@@ -20,7 +20,7 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
   // Responsive: show as overlay on mobile
   return (
     <>
-      {/* Backdrop for mobile overlay */}
+      {/* Backdrop for mobile overlay — clicking it dismisses the sidebar */}
       <div
         className={clsx(
           'fixed inset-0 bg-black/30 z-40 transition-opacity duration-300 md:hidden',
