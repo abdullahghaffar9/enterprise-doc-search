@@ -45,7 +45,7 @@ def _chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str
                 result.append(chunk)
         break
     else:
-        # Fallback: just split every chunk_size chars
+        # Fallback: hard-split every chunk_size chars when no separator is found
         result = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
     # Add overlap
