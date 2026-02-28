@@ -53,6 +53,7 @@ def _make_app() -> FastAPI:
 
     @app.get("/health")
     def health_check() -> dict:
+        # Lightweight liveness probe used by deployment platforms (Render, Railway, etc.)
         return {"status": "healthy"}
 
     return app
