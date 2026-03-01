@@ -14,7 +14,7 @@ const SearchDashboard = () => {
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    if (!query.trim()) return; // Ignore empty or whitespace-only queries
 
     setIsLoading(true);
     setHasSearched(true);
