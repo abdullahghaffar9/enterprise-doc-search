@@ -35,6 +35,7 @@ async def lifespan(_app: FastAPI):
 
 
 def _make_app() -> FastAPI:
+    # Factory function keeps app creation testable and isolated from module-level side effects
     app = FastAPI(title="AI Document QA API", lifespan=lifespan)
     
     # Get CORS origins from settings
