@@ -155,6 +155,7 @@ class LLMService:
         ]
 
     def generate_answer(self, question: str, context: str):
+        # Tries the configured provider first, then falls back to the others in order
         messages = self._system_messages(question, context)
         for provider in [self.llm_provider] + [p for p in LLM_PROVIDERS if p != self.llm_provider]:
             if provider == "groq":
