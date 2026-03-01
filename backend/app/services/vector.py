@@ -100,7 +100,7 @@ class VectorService:
                     "metadata": chunk["metadata"]
                 })
 
-            # Upsert in batches of 100
+            # Upsert in batches of 100 to respect Pinecone's 2MB per-request body limit
             batch_size = 100
             for i in range(0, len(vectors), batch_size):
                 batch = vectors[i:i + batch_size]
