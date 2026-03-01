@@ -7,6 +7,7 @@ import FileUpload from './components/FileUpload';
 import SearchDashboard from './components/SearchDashboard';
 
 // Main application component with header, file upload, and search dashboard
+// SectionTitle renders a consistent h2 heading used across page sections
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">{children}</h2>
