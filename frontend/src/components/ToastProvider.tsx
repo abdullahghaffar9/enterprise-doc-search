@@ -1,6 +1,7 @@
 import React from 'react';
 import { Toaster } from 'sonner';
 
+// Wraps the app with a global toast notification system (top-right, 3.5s auto-dismiss)
 export default function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <>
