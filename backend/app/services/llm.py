@@ -142,6 +142,7 @@ class LLMService:
         return None
 
     def _system_messages(self, question: str, context: str):
+        # Builds the system + user message list consumed by all provider clients
         return [
             {
                 "role": "system",
