@@ -22,6 +22,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   static getDerivedStateFromError(error: Error): State {
+    // Called before re-render; update state so next render shows fallback UI
     return { hasError: true, error };
   }
 
