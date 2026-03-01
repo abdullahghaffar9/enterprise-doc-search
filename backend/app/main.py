@@ -31,6 +31,7 @@ setup_logging(level="INFO")
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
+    # Startup/shutdown hook — add DB connections or cache warming here if needed
     yield
 
 
