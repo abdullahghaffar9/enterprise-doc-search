@@ -137,6 +137,7 @@ class LLMService:
         return None
 
     def _try_local(self, messages):
+        # Placeholder — extend this to integrate Ollama or other local runtimes
         logger.warning("No local LLM integration implemented.")
         return None
 
