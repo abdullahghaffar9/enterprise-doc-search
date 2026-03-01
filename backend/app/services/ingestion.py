@@ -36,7 +36,7 @@ def _chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str
                 current = candidate
         if current:
             chunks.append(current)
-        # Recursively split chunks that are still too large
+        # Recursively split chunks that are still too large after the first pass
         result = []
         for chunk in chunks:
             if len(chunk) > chunk_size:
