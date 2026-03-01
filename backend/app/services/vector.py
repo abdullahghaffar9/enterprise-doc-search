@@ -18,7 +18,7 @@ class VectorService:
             if self.index_name is None:
                 raise ValueError("PINECONE_INDEX_NAME environment variable is not set.")
             logger.info(f"[VectorService] Index name: {self.index_name}")
-            self.index = self.pc.Index(self.index_name)
+            self.index = self.pc.Index(self.index_name)  # Connects to existing index (must be pre-created)
             logger.info("[VectorService] Pinecone index initialized.")
 
             # LAZY LOAD FastEmbed Model (ONNX Runtime) - loaded only on first use
