@@ -30,6 +30,7 @@ export default function Modal({ open, onClose, title, children, size = 'md' }: M
             className="absolute inset-0 bg-black/30 backdrop-blur-sm"
             onClick={onClose}
             aria-label="Close modal"
+            // Clicking the backdrop outside the panel closes the modal
           />
           <motion.div
             className={`relative bg-white/95 dark:bg-slate-950/95 rounded-2xl border border-slate-100 dark:border-slate-900 w-full ${sizeMap[size]} mx-4 p-8 transition-all duration-200 shadow-none`}
