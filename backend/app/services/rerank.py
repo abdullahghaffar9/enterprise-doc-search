@@ -35,6 +35,7 @@ class RerankService:
         documents: List[Dict[str, Any]],
         top_k: int = 5,
     ) -> List[Dict[str, Any]]:
+        # Returns top_k documents sorted by cross-encoder relevance score (desc)
         if not documents:
             return []
         payload = {
