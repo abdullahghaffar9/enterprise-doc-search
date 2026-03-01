@@ -43,6 +43,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ filename, onBack }) => {
   };
 
   useEffect(() => {
+    // Auto-focus the input field when the chat interface mounts
     inputRef.current?.focus();
   }, []);
 
