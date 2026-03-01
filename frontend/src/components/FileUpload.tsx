@@ -61,7 +61,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUploadComplete }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { 'application/pdf': ['.pdf'] },
+    accept: { 'application/pdf': ['.pdf'] }, // Restrict to PDF files only
     multiple: false,
     disabled: status === 'uploading'
   });
