@@ -91,7 +91,7 @@ class VectorService:
 
             vectors = []
             for i, chunk in enumerate(valid_chunks):
-                # Ensure text is in metadata
+                # Ensure text is in metadata so it can be retrieved alongside the vector
                 if "text" not in chunk.get("metadata", {}):
                     chunk.setdefault("metadata", {})["text"] = chunk["text"]
                 vectors.append({
