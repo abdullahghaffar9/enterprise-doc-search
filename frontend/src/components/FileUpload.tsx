@@ -26,7 +26,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUploadComplete }) => {
       setProgress(0);
       setErrorMsg('');
       try {
-        // Simulate upload progress
+        // Simulate upload progress steps for visual feedback before the real request
         for (let p = 10; p <= 90; p += 20) {
           setProgress(p);
           await new Promise(res => setTimeout(res, 100));
