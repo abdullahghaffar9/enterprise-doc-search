@@ -53,7 +53,7 @@ const SearchDashboard = () => {
         </div>
       </form>
 
-      {/* RESULTS GRID */}
+      {/* RESULTS GRID — staggered fade-in via framer-motion delay per card */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {results.map((source, index) => (
           <motion.div
