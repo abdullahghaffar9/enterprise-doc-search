@@ -42,6 +42,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUploadComplete }) => {
         let errorMessage = 'Upload failed';
         
         // Extract meaningful error from axios or network error
+        // Provides user-friendly messages instead of raw exception text
         if (err instanceof Error) {
           if (err.message.includes('timeout')) {
             errorMessage = 'Upload timeout - backend may be busy';
