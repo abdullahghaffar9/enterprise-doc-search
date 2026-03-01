@@ -21,6 +21,7 @@ class QueryRequest(BaseModel):
     query: str = Field(..., min_length=1, description="User question")
 
 
+# Represents a single retrieved document chunk with its relevance score and metadata
 class SourceDoc(BaseModel):
     text: str
     score: Optional[float] = None
