@@ -58,6 +58,7 @@ class LLMService:
         return []
 
     def _try_groq(self, messages):
+        # Iterates configured GROQ_MODELS until one succeeds or all fail
         if not self.groq_client:
             logger.warning("Groq API key not configured.")
             return None
