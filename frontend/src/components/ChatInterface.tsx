@@ -38,6 +38,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ filename, onBack }) => {
   }, [query]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Submit on Enter key; guard against double-submit while loading
     if (e.key === 'Enter' && !isLoading) handleSearch();
   };
 
