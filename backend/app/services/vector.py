@@ -119,7 +119,7 @@ class VectorService:
         try:
             self._load_model()  # Lazy load model on first use
             assert self.model is not None, "Model should be loaded by _load_model()"
-            # 1. Embed Query Locally using FastEmbed
+            # 1. Embed Query Locally using FastEmbed (avoids external embedding API call)
             query_embeddings = list(self.model.embed([query]))
             query_embedding = query_embeddings[0]
             # Convert numpy array to list if needed
